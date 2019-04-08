@@ -351,6 +351,10 @@ void GUI::createActions()
 	connect(_showRouteWaypointsAction, SIGNAL(triggered(bool)), _mapView,
 	  SLOT(showRouteWaypoints(bool)));
 
+    // Strava actions
+    _displayStravaCache = new QAction(QIcon(STRAVA_ORANGE_ICON), tr("Display cache"), this);
+    connect(_displayStravaCache, SIGNAL(triggered()), this, SLOT(displayStravaCache()));
+
 	// Graph actions
 	_showGraphsAction = new QAction(QIcon(SHOW_GRAPHS_ICON), tr("Show graphs"),
 	  this);
@@ -543,6 +547,9 @@ void GUI::createMenus()
 	dataMenu->addAction(_showAreasAction);
 	dataMenu->addAction(_showWaypointsAction);
 
+    QMenu *stravaMenu = menuBar()->addMenu(tr("&Strava"));
+    stravaMenu->addAction(_displayStravaCache);
+
 	QMenu *settingsMenu = menuBar()->addMenu(tr("&Settings"));
 	QMenu *timeMenu = settingsMenu->addMenu(tr("Time"));
 	timeMenu->addAction(_totalTimeAction);
@@ -598,7 +605,12 @@ void GUI::createToolBars()
 	_navigationToolBar->addAction(_firstAction);
 	_navigationToolBar->addAction(_prevAction);
 	_navigationToolBar->addAction(_nextAction);
-	_navigationToolBar->addAction(_lastAction);
+    _navigationToolBar->addAction(_lastAction);
+
+    _stravaToolBar = addToolBar(tr("Strava"));
+    _stravaToolBar->setObjectName("Strava");
+    _stravaToolBar->setIconSize(iconSize);
+    _stravaToolBar->addAction(_displayStravaCache);
 }
 
 void GUI::createMapView()
@@ -766,6 +778,13 @@ bool GUI::openFile(const QString &fileName)
 
 		return false;
 	}
+}
+
+void GUI::displayStravaCache()
+{
+    QMessageBox msg;
+    msg.setText("Strava Hello World");
+    msg.exec();
 }
 
 bool GUI::loadFile(const QString &fileName)

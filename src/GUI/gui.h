@@ -63,6 +63,7 @@ private slots:
 	void nextMap();
 	void prevMap();
 	void openOptions();
+    void displayStravaCache();
 
 	void mapChanged(int);
 	void graphChanged(int);
@@ -138,9 +139,10 @@ private:
 	void dropEvent(QDropEvent *event);
 
 	QToolBar *_fileToolBar;
-	QToolBar *_showToolBar;
-	QToolBar *_navigationToolBar;
-	QMenu *_poiFilesMenu;
+    QToolBar *_showToolBar;
+    QToolBar *_navigationToolBar;
+    QToolBar *_stravaToolBar;
+    QMenu *_poiFilesMenu;
 	QMenu *_mapMenu;
 
 	QActionGroup *_fileActionGroup;
@@ -196,6 +198,7 @@ private:
 	QAction *_showCoordinatesAction;
 	QAction *_openOptionsAction;
 	QAction *_mapsEnd;
+    QAction *_displayStravaCache;
 	QList<QAction*> _mapActions;
 	QList<QAction*> _poiFilesActions;
 

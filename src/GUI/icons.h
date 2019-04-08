@@ -27,4 +27,7 @@
 #define DATA_ICON         ":/view-filter.png"
 #define MAPS_ICON         ":/applications-internet_32.png"
 
+// Strava icons
+#define STRAVA_ORANGE_ICON ":/strava_symbol_orange.png"
+
 #endif /* ICONS_H */
