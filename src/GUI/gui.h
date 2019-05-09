@@ -29,6 +29,7 @@ class Map;
 class MapList;
 class POI;
 class QScreen;
+class QDialog;
 
 class GUI : public QMainWindow
 {
@@ -63,7 +64,7 @@ private slots:
 	void nextMap();
 	void prevMap();
 	void openOptions();
-    void displayStravaCache();
+    void displayStravaCache(bool show);
 
 	void mapChanged(int);
 	void graphChanged(int);
@@ -213,6 +214,7 @@ private:
 	MapView *_mapView;
 	QTabWidget *_graphTabWidget;
 	QList<GraphTab*> _tabs;
+    QDialog* _stravaCacheWidget;
 
 	POI *_poi;
 	MapList *_ml;

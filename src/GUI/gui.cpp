@@ -52,7 +52,7 @@
 #include "graphitem.h"
 #include "pathitem.h"
 #include "gui.h"
-
+#include "stravacachewidget.h"
 
 #define TOOLBAR_ICON_SIZE 22
 
@@ -105,6 +105,8 @@ GUI::GUI()
 	updateGraphTabs();
 	updateMapView();
 	updateStatusBarInfo();
+
+    _stravaCacheWidget = nullptr;
 }
 
 void GUI::loadMaps()
@@ -353,7 +355,8 @@ void GUI::createActions()
 
     // Strava actions
     _displayStravaCache = new QAction(QIcon(STRAVA_ORANGE_ICON), tr("Display cache"), this);
-    connect(_displayStravaCache, SIGNAL(triggered()), this, SLOT(displayStravaCache()));
+    connect(_displayStravaCache, SIGNAL(triggered(bool)), this, SLOT(displayStravaCache(bool)));
+    _displayStravaCache->setCheckable(true);
 
 	// Graph actions
 	_showGraphsAction = new QAction(QIcon(SHOW_GRAPHS_ICON), tr("Show graphs"),
@@ -780,11 +783,21 @@ bool GUI::openFile(const QString &fileName)
 	}
 }
 
-void GUI::displayStravaCache()
+void GUI::displayStravaCache(bool show)
 {
-    QMessageBox msg;
-    msg.setText("Strava Hello World");
-    msg.exec();
+    if (_stravaCacheWidget == nullptr)
+    {
+        _stravaCacheWidget = new StravaCacheWidget(this);
+    }
+
+    if (show)
+    {
+        _stravaCacheWidget->show();
+    }
+    else
+    {
+        _stravaCacheWidget->hide();
+    }
 }
 
 bool GUI::loadFile(const QString &fileName)

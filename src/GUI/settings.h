@@ -88,7 +88,7 @@
 #define PALETTE_COLOR_SETTING             "paletteColor"
 #define PALETTE_COLOR_DEFAULT             QColor(Qt::blue)
 #define PALETTE_SHIFT_SETTING             "paletteShift"
-#define PALETTE_SHIFT_DEFAULT             0.62
+#define PALETTE_SHIFT_DEFAULT             0.0
 #define MAP_OPACITY_SETTING               "mapOpacity"
 #define MAP_OPACITY_DEFAULT               100
 #define BACKGROUND_COLOR_SETTING          "backgroundColor"
