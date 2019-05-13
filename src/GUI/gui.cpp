@@ -1281,6 +1281,7 @@ void GUI::showToolbars(bool show)
 		removeToolBar(_fileToolBar);
 		removeToolBar(_showToolBar);
 		removeToolBar(_navigationToolBar);
+        removeToolBar(_stravaToolBar);
 	}
 }
 
