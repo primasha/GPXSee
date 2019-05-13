@@ -86,9 +86,9 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="read_button">
+          <widget class="QPushButton" name="browse_button">
            <property name="text">
-            <string>Read</string>
+            <string>Browse</string>
            </property>
           </widget>
          </item>

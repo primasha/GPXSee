@@ -15,7 +15,7 @@ public:
     explicit StravaCacheWidget(QWidget *parent = nullptr);
 
 private slots:
-    void on_read_button_clicked();
+    void on_browse_button_clicked();
     void on_detail_level_combo_currentTextChanged(const QString &level);
 
     void on_display_button_clicked();

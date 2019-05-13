@@ -1,18 +1,20 @@
 #include "stravacachewidget.h"
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QFileDialog>
+
 #include "data/stravacache.h"
 
 using namespace std::string_literals;
 
 StravaCacheWidget::StravaCacheWidget(QWidget *parent) :
     QDialog(parent),
-    _showFirstTime(true)
+    _showFirstTime(true),
+    strava_cache_(nullptr)
 {
     setWindowModality(Qt::WindowModality::NonModal);
     setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
     ui.setupUi(this);
-    strava_cache_ = std::make_unique<StravaCache>(R"(D:\GitRepo\strava\strava-activity-loader\StravaActivitiesLoader\bin\Debug\Pryimachuk_4238847)"s);
 }
 
 void StravaCacheWidget::hideEvent(QHideEvent *event)
@@ -29,8 +31,11 @@ void StravaCacheWidget::showEvent(QShowEvent *event)
     _showFirstTime = false;
 }
 
-void StravaCacheWidget::on_read_button_clicked()
+void StravaCacheWidget::on_browse_button_clicked()
 {
+    const auto& cache_dir = QFileDialog::getExistingDirectory(this);
+    strava_cache_ = std::make_unique<StravaCache>(cache_dir.toStdString());
+
     QStringList qlevels;
     for(const auto& l : strava_cache_->detail_levels())
     {
@@ -59,6 +64,11 @@ void StravaCacheWidget::on_detail_level_combo_currentTextChanged(const QString &
 
 void StravaCacheWidget::on_display_button_clicked()
 {
+    if (strava_cache_ == nullptr)
+    {
+        return;
+    }
+
     const auto& level = ui.detail_level_combo->currentText().toStdString();
     const auto& year_from = ui.date_range_from->currentText().toInt();
     const auto& year_to = ui.date_range_to->currentText().toInt();
